@@ -11,7 +11,7 @@ import {
 /////////////
 // GET
 
-export async function getCabin(id: number): Promise<Cabin | null> {
+export async function getCabin(id: number | string): Promise<Cabin | null> {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
