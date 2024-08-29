@@ -7,6 +7,7 @@ import {
   Settings,
   Country,
 } from "@/app/_types/supabase";
+import { notFound } from "next/navigation";
 
 /////////////
 // GET
@@ -20,7 +21,7 @@ export async function getCabin(id: number | string): Promise<Cabin | null> {
 
   if (error) {
     console.error(error);
-    return null;
+    notFound();
   }
 
   return data;
