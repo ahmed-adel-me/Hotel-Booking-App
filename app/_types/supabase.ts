@@ -1,7 +1,7 @@
 // types/supabase.ts
 
 export interface Cabin {
-  id: number;
+  id: string;
   name: string;
   maxCapacity: number;
   regularPrice: number;

@@ -106,9 +106,7 @@ export async function getBookings(guestId: number): Promise<Booking[]> {
   return data as unknown as Booking[];
 }
 
-export async function getBookedDatesByCabinId(
-  cabinId: number
-): Promise<Date[]> {
+export async function getBookedDatesByCabinId(cabinId: string): Promise<any> {
   let today: Date | string = new Date();
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString();
