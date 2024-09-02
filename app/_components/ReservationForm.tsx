@@ -1,8 +1,9 @@
+"use client";
 import { Cabin } from "../_types/supabase";
 
 function ReservationForm({ cabin }: { cabin: Cabin }) {
   // CHANGE
-  const {maxCapacity} = cabin;
+  const { maxCapacity } = cabin;
 
   return (
     <div className="scale-[1.01]">
