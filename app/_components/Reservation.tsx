@@ -1,6 +1,8 @@
+import { auth } from "../_lib/auth";
 import { getBookedDatesByCabinId, getSettings } from "../_lib/data-service";
 import { Cabin } from "../_types/supabase";
 import DateSelector from "./DateSelector";
+import LoginMessage from "./LoginMessage";
 import ReservationForm from "./ReservationForm";
 
 async function Reservation({ cabin }: { cabin: Cabin }) {
@@ -8,6 +10,7 @@ async function Reservation({ cabin }: { cabin: Cabin }) {
     getSettings(),
     getBookedDatesByCabinId(cabin.id),
   ]);
+  const session = await auth();
   if (!settings || !bookedDates) return;
   return (
     <div className="grid grid-cols-2 border border-primary-800 min-h-[400px]">
@@ -16,7 +19,7 @@ async function Reservation({ cabin }: { cabin: Cabin }) {
         bookedDates={bookedDates}
         cabin={cabin}
       />
-      <ReservationForm cabin={cabin} />
+      {session?.user ? <ReservationForm cabin={cabin} user={session.user} /> : <LoginMessage />}
     </div>
   );
 }
