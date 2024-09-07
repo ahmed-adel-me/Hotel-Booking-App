@@ -11,8 +11,8 @@ export interface Cabin {
 }
 
 export interface Guest {
-  id: number;
-  name: string;
+  id?: string;
+  fullName: string | undefined | null;
   email: string;
 }
 
