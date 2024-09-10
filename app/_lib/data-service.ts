@@ -91,7 +91,7 @@ export async function getBooking(id: number): Promise<Booking | null> {
   return data;
 }
 
-export async function getBookings(guestId: number): Promise<Booking[]> {
+export async function getBookings(guestId?: string): Promise<Booking[]> {
   const { data, error } = await supabase
     .from("bookings")
     .select(

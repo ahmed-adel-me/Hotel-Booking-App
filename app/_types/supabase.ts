@@ -29,7 +29,7 @@ export interface Booking {
   totalPrice: number;
   guestId: number;
   cabinId: number;
-  cabin: Cabin;
+  cabin: { name: string; image: string };
 }
 
 export interface Settings {
