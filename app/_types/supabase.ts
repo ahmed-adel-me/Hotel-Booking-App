@@ -12,8 +12,11 @@ export interface Cabin {
 
 export interface Guest {
   id?: string;
-  fullName: string | undefined | null;
   email: string;
+  fullName?: string;
+  nationality?: string;
+  nationalID?: string;
+  countryFlag?: string;
 }
 
 export interface Booking {
