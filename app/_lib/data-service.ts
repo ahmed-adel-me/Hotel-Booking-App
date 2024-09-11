@@ -12,7 +12,7 @@ import { notFound } from "next/navigation";
 /////////////
 // GET
 
-export async function getCabin(id: number | string): Promise<Cabin | null> {
+export async function getCabin(id?: number | string): Promise<Cabin | null> {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
@@ -76,7 +76,7 @@ export async function getGuest(
   return data;
 }
 
-export async function getBooking(id: number): Promise<Booking | null> {
+export async function getBooking(id: number | string): Promise<Booking | null> {
   const { data, error } = await supabase
     .from("bookings")
     .select("*")

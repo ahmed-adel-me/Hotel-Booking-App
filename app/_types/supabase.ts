@@ -27,6 +27,8 @@ export interface Booking {
   numNights: number;
   numGuests: number;
   totalPrice: number;
+  extrasPrice: number;
+  observations: string;
   guestId: number;
   cabinId: number;
   cabin: { name: string; image: string };

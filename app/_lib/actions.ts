@@ -3,7 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "./auth";
 import { supabase } from "./supabase";
-import { getBookings } from "./data-service";
+import { getBooking, getBookings, getCabin } from "./data-service";
+import { redirect } from "next/navigation";
 
 export async function signInAction() {
   await signIn("google", { redirectTo: "/account" });
@@ -62,3 +63,59 @@ export async function deleteReservation(bookingId: number) {
   }
   revalidatePath("/account/reservations");
 }
+
+export async function updateReservation(formData: FormData) {
+  const bookingId = formData.get("bookingId")?.toString();
+  if (!bookingId) throw new Error("bookingId doesn't exist");
+  const session = await auth();
+  if (!session) throw new Error("You must be logged in");
+  const guestBookings = await getBookings(session.user.guestId);
+  const guestBookingIds = guestBookings.map((booking) => booking.id);
+  if (!guestBookingIds.includes(+bookingId)) {
+    throw new Error("You are not allowed to delete this Booking");
+  }
+
+  const reservation = await getBooking(bookingId);
+  const cabin = await getCabin(reservation?.cabinId);
+  if (!cabin || !reservation) throw new Error("reservation doesn't exist");
+  const numGuests = +formData.get("numGuests")?.toString()!;
+  const cabinPrice = (cabin.regularPrice - cabin?.discount) * numGuests;
+  const totalPrice = cabinPrice + reservation?.extrasPrice;
+
+  const updateData = {
+    numGuests,
+    cabinPrice,
+    totalPrice,
+    observations: formData.get("observations")?.toString().slice(0, 1000),
+  };
+  const { error } = await supabase
+    .from("bookings")
+    .update(updateData)
+    .eq("id", bookingId)
+    .select()
+    .single();
+
+  if (error) {
+    throw new Error("Booking could not be updated");
+  }
+  revalidatePath("/account/reservations", "layout");
+  redirect("/account/reservations");
+}
+
+// export async function updateBooking(
+//   id: number,
+//   updatedFields: Partial<Booking>
+// ): Promise<Booking> {
+//   const { data, error } = await supabase
+//     .from("bookings")
+//     .update(updatedFields)
+//     .eq("id", id)
+//     .select()
+//     .single();
+
+//   if (error) {
+//     console.error(error);
+//     throw new Error("Booking could not be updated");
+//   }
+//   return data;
+// }
