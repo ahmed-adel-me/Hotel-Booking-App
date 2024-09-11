@@ -5,8 +5,6 @@ declare module "next-auth" {
   interface Session {
     user: {
       guestId?: string;
-      email: string;
-      // Include any other fields you might use
-    };
+    } & DefaultSession["user"];  // Extend without overriding default fields
   }
 }
