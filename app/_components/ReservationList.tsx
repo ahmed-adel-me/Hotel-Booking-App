@@ -2,7 +2,7 @@
 import { useOptimistic } from "react";
 import { Booking } from "../_types/supabase";
 import ReservationCard from "./ReservationCard";
-import { deleteReservation } from "../_lib/actions";
+import { deleteBooking } from "../_lib/actions";
 
 function ReservationList({ bookings }: { bookings: Booking[] }) {
   const [optimisticBookings, optimisticDelete] = useOptimistic(
@@ -14,7 +14,7 @@ function ReservationList({ bookings }: { bookings: Booking[] }) {
 
   async function handleDelete(bookingId: number) {
     optimisticDelete(bookingId);
-    await deleteReservation(bookingId);
+    await deleteBooking(bookingId);
   }
   return (
     <ul className="space-y-6">

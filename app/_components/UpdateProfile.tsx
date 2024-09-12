@@ -60,7 +60,7 @@ function UpdateProfile({
       </div>
 
       <div className="flex justify-end items-center gap-6">
-        <SubmitBtn>
+        <SubmitBtn pendingLabel="Updating...">
         Update profile
         </SubmitBtn>
       </div>

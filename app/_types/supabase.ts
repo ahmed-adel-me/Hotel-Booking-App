@@ -1,7 +1,7 @@
 // types/supabase.ts
 
 export interface Cabin {
-  id: string;
+  id: number;
   name: string;
   maxCapacity: number;
   regularPrice: number;
@@ -11,7 +11,7 @@ export interface Cabin {
 }
 
 export interface Guest {
-  id?: string;
+  id?: number ;
   email: string;
   fullName?: string;
   nationality?: string;
@@ -35,7 +35,8 @@ export interface Booking {
 }
 
 export interface Settings {
-  // Define the fields according to your settings structure
+  minBookingLength: number;
+  maxBookingLength: number;
 }
 
 export interface Country {

@@ -2,15 +2,15 @@
 
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { useTransition } from "react";
-import { deleteReservation } from "../_lib/actions";
+import { deleteBooking } from "../_lib/actions";
 import SpinnerMini from "./SpinnerMini";
 
-function DeleteReservation({
+function DeleteBooking({
   bookingId,
   onDelete,
 }: {
   bookingId: number;
-  onDelete: (bookingId:number) => void;
+  onDelete: (bookingId: number) => void;
 }) {
   const [isPending, startTransition] = useTransition();
 
@@ -41,4 +41,4 @@ function DeleteReservation({
   );
 }
 
-export default DeleteReservation;
+export default DeleteBooking;

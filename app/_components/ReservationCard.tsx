@@ -1,6 +1,6 @@
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
 import { format, formatDistance, isPast, isToday, parseISO } from "date-fns";
-import DeleteReservation from "./DeleteReservation";
+import DeleteBooking from "./DeleteBooking";
 import Image from "next/image";
 import { Booking } from "../_types/supabase";
 import Link from "next/link";
@@ -15,7 +15,7 @@ function ReservationCard({
   onDelete,
 }: {
   booking: Booking;
-  onDelete: (bookingId:number) => void;
+  onDelete: (bookingId: number) => void;
 }) {
   const {
     id,
@@ -87,7 +87,7 @@ function ReservationCard({
               <PencilSquareIcon className="h-5 w-5 text-primary-600 group-hover:text-primary-800 transition-colors" />
               <span className="mt-1">Edit</span>
             </Link>
-            <DeleteReservation bookingId={id} onDelete={onDelete} />
+            <DeleteBooking bookingId={id} onDelete={onDelete} />
           </>
         )}
       </div>

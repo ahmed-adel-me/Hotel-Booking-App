@@ -60,7 +60,7 @@ export default async function Page({
         </div>
 
         <div className="flex justify-end items-center gap-6">
-          <SubmitBtn>Update reservation</SubmitBtn>
+          <SubmitBtn pendingLabel="Updating...">Update reservation</SubmitBtn>
         </div>
       </form>
     </div>
