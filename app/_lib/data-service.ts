@@ -76,7 +76,7 @@ export async function getGuest(
   return data;
 }
 
-export async function getBooking(id: number | string): Promise<Booking | null> {
+export async function getBooking(id: number): Promise<Booking | null> {
   const { data, error } = await supabase
     .from("bookings")
     .select("*")
@@ -91,7 +91,7 @@ export async function getBooking(id: number | string): Promise<Booking | null> {
   return data;
 }
 
-export async function getBookings(guestId?: string): Promise<Booking[]> {
+export async function getBookings(guestId?: number): Promise<Booking[]> {
   const { data, error } = await supabase
     .from("bookings")
     .select(
@@ -108,7 +108,7 @@ export async function getBookings(guestId?: string): Promise<Booking[]> {
   return data as unknown as Booking[];
 }
 
-export async function getBookedDatesByCabinId(cabinId: string): Promise<Date[]> {
+export async function getBookedDatesByCabinId(cabinId: number): Promise<Date[]> {
   let today: Date | string = new Date();
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString();

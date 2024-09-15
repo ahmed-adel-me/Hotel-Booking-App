@@ -7,7 +7,7 @@ export default async function Page({
 }: {
   params: { reservationId: string };
 }) {
-  const reservation = await getBooking(params.reservationId);
+  const reservation = await getBooking(Number(params.reservationId));
   if (!reservation) throw new Error("this reservation doesn't exist");
   const cabin = await getCabin(reservation.cabinId);
   if (!cabin) throw new Error("this reservation cabin doesn't exist");

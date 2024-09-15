@@ -4,7 +4,7 @@ import NextAuth, { DefaultSession } from "next-auth";  // Import DefaultSession 
 declare module "next-auth" {
   interface Session {
     user: {
-      guestId?: string;  // Add guestId as an optional field
+      guestId?: number;  // Add guestId as an optional field
     } & DefaultSession["user"];  // Merge with the default user fields in NextAuth
   }
 }

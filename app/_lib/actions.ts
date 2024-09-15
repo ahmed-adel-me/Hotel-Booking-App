@@ -76,7 +76,7 @@ export async function updateReservation(formData: FormData) {
     throw new Error("You are not allowed to delete this Booking");
   }
 
-  const reservation = await getBooking(bookingId);
+  const reservation = await getBooking(Number(bookingId));
   const cabin = await getCabin(reservation?.cabinId);
   if (!cabin || !reservation) throw new Error("reservation doesn't exist");
   const numGuests = +formData.get("numGuests")?.toString()!;
